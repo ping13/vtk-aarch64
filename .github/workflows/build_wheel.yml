@@ -9,18 +9,18 @@ on:
         type: string
       vtk_full_version:
         description: "VTK full version"
-        default: "9.4.1"
+        default: "9.3.1"
         type: string
       vtk_short_version:
         description: "VTK short version"
-        default: "9.4"
+        default: "9.3"
 
 
 jobs:
 
   build_wheels:
     name: Build wheel
-    runs-on: ubuntu-24.04-arm  # macos-14
+    runs-on: ubuntu-24.04-arm  
 
     steps:
       - uses: actions/checkout@v4
