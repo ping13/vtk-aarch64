@@ -15,22 +15,23 @@ on:
         description: "VTK short version"
         default: "9.3"
 
-
 jobs:
-
   build_wheels:
     name: Build wheel
-    runs-on: ubuntu-24.04-arm  
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup dependencies
-        run: sudo apt update && sudo apt install -y build-essential cmake cmake-curses-gui libgl1 xvfb x11-xserver-utils libglx-mesa0 libosmesa6-dev mesa-common-dev mesa-utils freeglut3-dev ninja-build 
-      
+        run: sudo apt update && sudo apt install -y build-essential cmake cmake-curses-gui libgl1 xvfb x11-xserver-utils libglx-mesa0 libosmesa6-dev mesa-common-dev mesa-utils freeglut3-dev ninja-build
+
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ github.event.inputs.python_version }}
+
+      - name: Set TERM environment variable
+        run: echo "TERM=xterm" >> $GITHUB_ENV
 
       - name: Download vtk
         run: wget https://www.vtk.org/files/release/${{ github.event.inputs.vtk_short_version }}/VTK-${{ github.event.inputs.vtk_full_version }}.tar.gz
